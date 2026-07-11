@@ -110,14 +110,16 @@ loan-approval-prediction-webapp/
 ---
 ## 🖼️ Screenshots
 
+## 🖼️ Screenshots
+
 ### Landing Page
-![Landing Page](static/images/screenshot-Landing.png)
+![Landing Page](static/images/Landing.png)
 
 ### Application Form
-![Application Form](static/images/screenshot-form.png)
+![Application Form](static/images/form.png)
 
 ### Prediction Result
-![Prediction Result](static/images/screenshot-result.png)
+![Prediction Result](static/images/result.png)
 ## ⚙️ How It Works (Data Flow)
 User fills form (index.html)
 ↓
