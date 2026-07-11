@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result | Loan Approval Prediction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo"><i class="fa-solid fa-landmark"></i> LoanIQ</div>
+            <div class="nav-badge"><i class="fa-solid fa-robot"></i> AI-Powered Prediction</div>
+        </div>
+    </nav>
+
+    <main class="result-section">
+        <div class="result-card {{ 'approved' if result.prediction == 'Approved' else 'rejected' }}">
+
+            <div class="result-icon">
+                {% if result.prediction == 'Approved' %}
+                    <i class="fa-solid fa-circle-check"></i>
+                {% else %}
+                    <i class="fa-solid fa-circle-xmark"></i>
+                {% endif %}
+            </div>
+
+            <h1 class="result-title">
+                Loan {{ result.prediction }}
+            </h1>
+
+            <p class="result-subtitle">
+                {% if result.prediction == 'Approved' %}
+                    Based on the applicant's financial profile, this loan is likely to be approved.
+                {% else %}
+                    Based on the applicant's financial profile, this loan is likely to be rejected.
+                {% endif %}
+            </p>
+
+            <div class="confidence-section">
+                <div class="confidence-label">Model Confidence</div>
+                <div class="confidence-bar-bg">
+                    <div class="confidence-bar-fill {{ 'approved' if result.prediction == 'Approved' else 'rejected' }}"
+                         style="width: {{ result.confidence }}%">
+                    </div>
+                </div>
+                <div class="confidence-value">{{ result.confidence }}%</div>
+            </div>
+
+            <div class="probability-grid">
+                <div class="probability-card approved-prob">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <span class="prob-value">{{ result.approved_probability }}%</span>
+                    <span class="prob-label">Approval Probability</span>
+                </div>
+                <div class="probability-card rejected-prob">
+                    <i class="fa-solid fa-arrow-down"></i>
+                    <span class="prob-value">{{ result.rejected_probability }}%</span>
+                    <span class="prob-label">Rejection Probability</span>
+                </div>
+            </div>
+
+            <div class="applicant-summary">
+                <h3><i class="fa-solid fa-list-check"></i> Application Summary</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">Annual Income</span>
+                        <span class="summary-value">${{ "{:,.0f}".format(form_data.income_annual) }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Loan Amount</span>
+                        <span class="summary-value">${{ "{:,.0f}".format(form_data.loan_amount) }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Credit Score</span>
+                        <span class="summary-value">{{ form_data.credit_score|int }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Loan Purpose</span>
+                        <span class="summary-value">{{ form_data.loan_purpose }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <a href="/" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i> Try Another Application
+            </a>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Built by Talal Noor &middot; Machine Learning Project &middot; Random Forest Classifier</p>
+    </footer>
+
+</body>
+</html>
