@@ -1,9 +1,10 @@
+
 pandas
 numpy
 matplotlib
 seaborn
 scikit-learn
-jupyter
-flask
 joblib
+flask
 gunicorn
+ 
